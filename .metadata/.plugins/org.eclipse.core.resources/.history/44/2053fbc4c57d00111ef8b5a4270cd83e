@@ -1,0 +1,8 @@
+package groupMembership;
+
+import java.net.InetAddress;
+
+public class server {
+	public InetAddress ip;
+	public Integer port;
+}

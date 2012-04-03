@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="39" version="2.0">
+<workbench progressCount="65" version="2.0">
 <workbenchAdvisor/>
 <window height="556" width="1024" x="0" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -8,7 +8,7 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="251" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="122" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="124" y="22"/>
 <coolItem id="org.eclipse.jst.j2ee.J2eeMainActionSet" itemType="typeToolBarContribution" x="87" y="22"/>
@@ -53,33 +53,33 @@
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/Startup.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Session.java" partName="Session.java" title="Session.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\session\Session.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Session.java" partName="Session.java" title="Session.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\session\Session.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/Session.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="262" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="258" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SessionCleaner.java" partName="SessionCleaner.java" title="SessionCleaner.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\session\SessionCleaner.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/SessionCleaner.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="564" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SessionManager.java" partName="SessionManager.java" title="SessionManager.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\session\SessionManager.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/SessionManager.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RPCClient.java" partName="RPCClient.java" title="RPCClient.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\rpc\RPCClient.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/rpc/RPCClient.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RPCServer.java" partName="RPCServer.java" title="RPCServer.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\rpc\RPCServer.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/rpc/RPCServer.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="438" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1000" selectionTopPixel="104"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GroupMembership.java" partName="GroupMembership.java" title="GroupMembership.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\groupMembership\GroupMembership.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/GroupMembership.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="947" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" partName="Server.java" title="Server.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\groupMembership\Server.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/Server.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1151" selectionTopPixel="508"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="454" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Session.java" partName="Session.java" path="C:/Users/Wen-Hao/Desktop/CS5300-Proj1/P1/src/session/Session.java" title="Session.java" tooltip="P1/src/session/Session.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/P1/src/session/Session.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="695" selectionTopPixel="450"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" partName="Server.java" path="C:/Users/Wen-Hao/Desktop/CS5300-Proj1/P1/src/groupMembership/Server.java" title="Server.java" tooltip="P1/src/groupMembership/Server.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/P1/src/groupMembership/Server.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="129" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -88,6 +88,9 @@
 </view>
 <view id="org.eclipse.ui.views.AllMarkersView" partName="Markers">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.allSeverityField" categoryGroup="org.eclipse.ui.ide.type" markerContentGenerator="org.eclipse.ui.ide.allMarkersGenerator" partName="Markers">
+<expanded>
+<category IMemento.internal.id="Java Problems (14 items)"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.allSeverityField="250" org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="75" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.resourceField="75"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.allSeverityField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -235,29 +238,167 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/Project1.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/P1/src/session/Session.java"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/Session.java"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/rpc/RPCClient.java"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/SessionCleaner.java"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/session/SessionManager.java"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/Server.java"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/GroupMembership.java"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/rpc/RPCClient.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/P1/src/groupMembership/server.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/P1/src/groupMembership/Server.java"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/rpc/RPCServer.java"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/P3/src/CS5300/sesstable.java"/>
 </editors>
-<item historyLabel="Project1.java" index="0">
-<position info="not_deleted" x="553" y="0"/>
+<item historyLabel="Session.java" index="0">
+<position/>
+</item>
+<item historyLabel="SessionCleaner.java" index="2">
+<position info="not_deleted" x="487" y="0"/>
+</item>
+<item historyLabel="SessionManager.java" index="3">
+<position info="not_deleted" x="2369" y="0"/>
 </item>
 <item historyLabel="Session.java" index="1">
-<position info="not_deleted" x="0" y="0"/>
+<position info="not_deleted" x="1824" y="0"/>
 </item>
-<item historyLabel="RPCClient.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Session.java" index="0">
+<position/>
 </item>
-<item historyLabel="GroupMembership.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="SessionCleaner.java" index="2">
+<position info="not_deleted" x="487" y="0"/>
 </item>
-<item historyLabel="RPCServer.java" index="4">
+<item historyLabel="SessionManager.java" index="3">
+<position info="not_deleted" x="1607" y="0"/>
+</item>
+<item historyLabel="SessionCleaner.java" index="2">
+<position info="not_deleted" x="564" y="0"/>
+</item>
+<item historyLabel="SessionManager.java" index="3">
+<position info="not_deleted" x="1607" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="1151" y="0"/>
+</item>
+<item historyLabel="GroupMembership.java" index="5">
+<position info="not_deleted" x="1074" y="0"/>
+</item>
+<item historyLabel="SessionManager.java" index="3">
+<position info="not_deleted" x="1000" y="0"/>
+</item>
+<item historyLabel="GroupMembership.java" index="5">
+<position info="not_deleted" x="1153" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="613" y="0"/>
+</item>
+<item historyLabel="RPCClient.java" index="6">
+<position info="not_deleted" x="647" y="0"/>
+</item>
+<item historyLabel="SessionCleaner.java" index="2">
+<position info="not_deleted" x="564" y="0"/>
+</item>
+<item historyLabel="Session.java" index="1">
+<position info="not_deleted" x="258" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="218" y="0"/>
+</item>
+<item historyLabel="server.java" index="7">
+<position info="not_deleted" x="216" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="122" y="50"/>
+</item>
+<item historyLabel="server.java" index="7">
+<position info="not_deleted" x="216" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="464" y="85"/>
+</item>
+<item historyLabel="server.java" index="7">
+<position info="not_deleted" x="190" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="422" y="0"/>
+</item>
+<item historyLabel="server.java" index="7">
+<position info="not_deleted" x="190" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="422" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="176" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="172" y="0"/>
+</item>
+<item historyLabel="RPCClient.java" index="6">
+<position info="not_deleted" x="647" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="172" y="0"/>
+</item>
+<item historyLabel="RPCServer.java" index="9">
 <position info="not_deleted" x="438" y="0"/>
 </item>
-<item active="true" historyLabel="Session.java" index="1">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="431" y="0"/>
+</item>
+<item historyLabel="GroupMembership.java" index="5">
+<position info="not_deleted" x="947" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="156" y="0"/>
+</item>
+<item historyLabel="Server.java" index="4">
+<position info="not_deleted" x="454" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="115" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position/>
+</item>
+<item historyLabel="sesstable.java" index="10">
+<position info="not_deleted" x="177" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="577" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1616" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1540" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1544" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1567" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1550" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="115" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="263" y="0"/>
+</item>
+<item historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1550" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="263" y="0"/>
+</item>
+<item historyLabel="Server.java" index="8">
+<position info="not_deleted" x="129" y="0"/>
+</item>
+<item active="true" historyLabel="Session.java" index="0">
+<position info="not_deleted" x="1550" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -265,6 +406,13 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="topLeft"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="bottomRight"/>
+<trimItem IMemento.internal.id="topRight"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
@@ -277,6 +425,18 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="sesstable.java" tooltip="C:\Users\Wen-Hao\Desktop\P3\src\CS5300\sesstable.java">
+<persistable uri="file:/C:/Users/Wen-Hao/Desktop/P3/src/CS5300/sesstable.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" tooltip="P1/src/groupMembership/Server.java">
+<persistable path="/P1/src/groupMembership/Server.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Session.java" tooltip="P1/src/session/Session.java">
+<persistable path="/P1/src/session/Session.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Session.java" tooltip="P1/src/Session.java">
+<persistable path="/P1/src/Session.java"/>
+</file>
 <file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" tooltip="C:\Users\Wen-Hao\Desktop\CS5300-Proj1\Harrison\src\groupMembership\Server.java">
 <persistable uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/Server.java"/>
 </file>

@@ -1,0 +1,42 @@
+package session;
+
+import groupMembership.Server;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
+
+public class Session {
+	private Server creator;
+	private Integer sess_num;
+	private Integer change_count;
+	private Server primary,backup;
+	private Date timestamp;
+	private String message;
+	
+	public Session(Server creator,Integer sess_num,
+			Server primary, Server backup) {
+		this.creator = creator;
+		this.sess_num = sess_num;
+		this.primary = primary;
+		this.backup = backup;
+		this.change_count=0;
+		this.timestamp = new Date();
+	}
+
+	public void updateTimestamp() {
+		this.timestamp = new Date();
+	}
+	//Gets timestamp of session in seconds since epoch
+	public long getTimestamp() {
+		return timestamp.getTime()/1000;
+	}
+
+	public void incrementVersion() {
+		this.change_count++;
+	}
+
+	public String toString() {
+		return "ID:"+sessionID+"<br />Version:"+version+"<br />Locations:"+this.getLocationsString();
+	}
+}

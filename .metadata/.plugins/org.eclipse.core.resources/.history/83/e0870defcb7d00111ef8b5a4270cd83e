@@ -1,0 +1,95 @@
+package session;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
+
+public class Session {
+	private static final long serialVersionUID = 4376448148045677097L;
+	private String sessionID;
+	private Integer version;
+	private Date timestamp;
+	private ArrayList<Server> locations = new ArrayList<Server>();
+	private Hashtable<String, String> data = new Hashtable<String, String>();
+
+	public Session(String sessionID, ArrayList<Server> list) {
+		this.setSessionID(sessionID);
+		this.setLocations(list);
+		this.version = 0;
+		this.timestamp = new Date();
+	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
+	}
+
+	public String getSessionID() {
+		return sessionID;
+	}
+
+	public String getVersion() {
+		return version.toString();
+	}
+
+	public void setVersion(Integer version){
+		this.version = version;
+	}
+
+	public void updateTimestamp() {
+		this.timestamp = new Date();
+	}
+	//Gets timestamp of session in seconds since epoch
+	public long getTimestamp() {
+		return timestamp.getTime()/1000;
+	}
+
+	public void setLocations(ArrayList<Server> list) {
+		locations = list;
+	}
+	public void clearLocations() {
+		locations.clear();
+	}
+	public void addLocation(Server s) {
+		if(!locations.contains(s)) {
+			locations.add(s);
+		}
+	}
+	public ArrayList<Server> getLocations() {
+		return locations;
+	}
+	//Returns locations as a string of integers joined by ","
+	public String getLocationsString() {
+		StringBuilder buffer = new StringBuilder();
+		int length = locations.size();
+		for (int i= 0; i<length; i++) {
+			buffer.append(locations.get(i));
+			if (i<length-1) {
+				buffer.append(",");
+			}
+		}
+		return buffer.toString();		
+	}
+
+	public void incrementVersion() {
+		this.version++;
+	}
+
+	//get data structure
+
+	public Hashtable<String,String> getDataStructure(){
+		return this.data;
+	}
+
+	//Set session data
+	public void setData(String key, String value) {
+		this.data.put(key, value);
+	}
+	//Get session data
+	public String getData(String key) {
+		return this.data.get(key);
+	}
+
+	public String toString() {
+		return "ID:"+sessionID+"<br />Version:"+version+"<br />Locations:"+this.getLocationsString();
+	}
+}
