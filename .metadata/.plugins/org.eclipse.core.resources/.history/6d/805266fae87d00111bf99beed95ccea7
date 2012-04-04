@@ -1,0 +1,17 @@
+package groupMembership;
+
+import java.net.InetAddress;
+
+public class Server {
+	private InetAddress ip;
+	private Integer port;
+
+	Server(InetAddress sip, int sport) {
+		ip = sip;
+		port = sport;
+	}
+	
+	public String toString() {
+		return ip+":"+port;
+	}
+}

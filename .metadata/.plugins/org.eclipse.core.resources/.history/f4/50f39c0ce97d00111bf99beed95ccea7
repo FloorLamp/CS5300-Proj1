@@ -1,0 +1,21 @@
+package session;
+
+import java.util.Date;
+
+public class Session {
+	private Integer changecount;
+	private String message;
+	private Long expiration;
+	private Server primary,backup;
+	
+	Session(Integer a, String b, Long c) {
+		this.changecount = a;
+		this.message = b;
+		this.expiration = c;
+	}
+	
+	public Server getPrimary() {
+		return primary;
+	}
+	
+}

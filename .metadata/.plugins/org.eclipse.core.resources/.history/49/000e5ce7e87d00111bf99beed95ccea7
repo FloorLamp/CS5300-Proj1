@@ -1,0 +1,11 @@
+package session;
+
+import java.util.Date;
+
+public class Session {
+	private Integer changecount;
+	private String message;
+	private Long expiration;
+	private Server primary,backup;	
+	
+}

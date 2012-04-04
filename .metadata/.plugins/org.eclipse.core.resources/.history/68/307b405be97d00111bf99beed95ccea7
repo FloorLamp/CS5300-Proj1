@@ -8,7 +8,6 @@ import session.Session;
 public class Server {
 	private InetAddress ip;
 	private Integer port;
-	private final String IPP = ip+"-"+port;
 	private Hashtable<Integer,Session> hash;
 
 	Server(InetAddress sip, int sport) {
@@ -17,14 +16,6 @@ public class Server {
 	}
 	
 	public String toString() {
-		return IPP;
-	}
-
-	public Hashtable<Integer,Session> getHash() {
-		return hash;
-	}
-
-	public void setHash(Hashtable<Integer,Session> hash) {
-		this.hash = hash;
+		return ip+":"+port;
 	}
 }

@@ -17,14 +17,6 @@ public class Server {
 	}
 	
 	public String toString() {
-		return IPP;
-	}
-
-	public Hashtable<Integer,Session> getHash() {
-		return hash;
-	}
-
-	public void setHash(Hashtable<Integer,Session> hash) {
-		this.hash = hash;
+		return ip+":"+port;
 	}
 }
