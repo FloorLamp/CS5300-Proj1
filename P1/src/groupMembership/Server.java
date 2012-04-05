@@ -3,6 +3,7 @@ package groupMembership;
 import java.net.InetAddress;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Set;
 
 import session.Cookie;
 import session.HttpServletRequest;
@@ -10,18 +11,27 @@ import session.HttpServletResponse;
 import session.Session;
 
 public class Server {
-	private InetAddress ip;
-	private Integer port;
+	public InetAddress ip;
+	public Integer port;
 	private final String IPP = ip+"-"+port;
 	private static Hashtable<Integer,Session> hash;
 	private static final long expiration = 5000;
 	private static final String cookiename = "CS5300PROJECT1SESSION";
+	
+	private GroupMembershipManager gmm;
 
-	Server(InetAddress sip, int sport) {
+	public Server(InetAddress sip, int sport) {
 		ip = sip;
 		port = sport;
+		
+		gmm = new GroupMembershipManager(this.toString());
+		gmm.start();
 	}
 
+	public Set<String> getMbrSet() {
+		return gmm.getMbrSet();
+	}
+	
 	public String toString() {
 		return IPP;
 	}
