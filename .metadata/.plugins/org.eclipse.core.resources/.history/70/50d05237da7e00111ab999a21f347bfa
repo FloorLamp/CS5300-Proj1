@@ -1,0 +1,20 @@
+package session;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+/**
+ * Servlet implementation class SessionManager
+ */
+@WebServlet("/SessionManager")
+public class SessionManager extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public SessionManager() {
+        // TODO Auto-generated constructor stub
+    }
+
+}

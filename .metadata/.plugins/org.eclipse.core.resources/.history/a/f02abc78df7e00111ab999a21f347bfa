@@ -1,0 +1,30 @@
+package groupMembership;
+
+import java.net.InetAddress;
+import java.util.Hashtable;
+
+import session.Session;
+
+public class Server {
+	private InetAddress ip;
+	private Integer port;
+	private final String IPP = ip+"-"+port;
+	private Hashtable<Integer,Session> hash;
+
+	Server(InetAddress sip, int sport) {
+		ip = sip;
+		port = sport;
+	}
+	
+	public String toString() {
+		return IPP;
+	}
+
+	public Hashtable<Integer,Session> getHash() {
+		return hash;
+	}
+
+	public void setHash(Hashtable<Integer,Session> hash) {
+		this.hash = hash;
+	}
+}

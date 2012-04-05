@@ -3,12 +3,13 @@ package session;
 import groupMembership.Server;
 
 public class Session {
+	private Server IPP;
 	private Integer changecount;
 	private String message;
 	private Long expiration;
 	private Server primary,backup;
 	
-	Session(Integer a, String b, Long c) {
+	public Session(Integer a, String b, Long c) {
 		this.setChangecount(a);
 		this.setMessage(b);
 		this.setExpiration(c);
@@ -52,6 +53,14 @@ public class Session {
 
 	public void setExpiration(Long expiration) {
 		this.expiration = expiration;
+	}
+
+	public Server getIPP() {
+		return IPP;
+	}
+
+	public void setIPP(Server iPP) {
+		IPP = iPP;
 	}
 	
 }

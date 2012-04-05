@@ -1,0 +1,37 @@
+package session;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class SessionManager extends HttpServlet {
+
+	public static Session getAndIncrement(HttpServletRequest request) {
+	    Cookie[] cookies = request.getCookies();
+	    Cookie cookie = null;
+	    Session session;
+	    if (cookies != null) {
+	      for (int i = 0; i < cookies.length; i++) {
+	        Cookie c = cookies[i];
+	        if (c.getName().equals(cookieName)) {
+	          cookie = c;
+	        }
+	      }
+	    }
+	    if (cookie == null) {
+	      session = initialize();
+	    } else {
+	      session = getSessionFromCookie(cookie.getValue());
+	      // If we are unable to get session
+	      if (session == null) {
+	        session = initialize();
+	      } else {
+	        session.incrementVersion();
+	      }
+	    }
+	    return session;
+	  }
+}
