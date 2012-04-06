@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="64" version="2.0">
+<workbench progressCount="71" version="2.0">
 <workbenchAdvisor/>
 <window height="556" maximized="true" width="1024" x="0" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -75,7 +75,7 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" partName="Server.java" path="C:/Users/Wen-Hao/Desktop/CS5300-Proj1/P1/src/groupMembership/Server.java" title="Server.java" tooltip="P1/src/groupMembership/Server.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/P1/src/groupMembership/Server.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1609" selectionTopPixel="647"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="134" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -84,8 +84,7 @@
 </view>
 <view id="org.eclipse.ui.views.AllMarkersView" partName="Markers">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.allSeverityField" categoryGroup="org.eclipse.ui.ide.type" markerContentGenerator="org.eclipse.ui.ide.allMarkersGenerator" partName="Markers">
-<expanded>
-<category IMemento.internal.id="Java Problems (8 items)"/>
+<expanded>&#x0A;<category IMemento.internal.id="Java Problems (8 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.allSeverityField="250" org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="75" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.resourceField="75"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.allSeverityField"/>
@@ -249,9 +248,6 @@
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/P3/src/CS5300/wph.java"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/Users/Wen-Hao/Desktop/CS5300-Proj1/Harrison/src/groupMembership/Server.java"/>
 </editors>
-<item historyLabel="SessionManager.java" index="2">
-<position info="not_deleted" x="268" y="0"/>
-</item>
 <item historyLabel="SessionManager.java" index="1">
 <position/>
 </item>
@@ -396,8 +392,11 @@
 <item historyLabel="SessionManager.java" index="1">
 <position info="not_deleted" x="287" y="0"/>
 </item>
-<item active="true" historyLabel="Server.java" index="4">
+<item historyLabel="Server.java" index="4">
 <position info="not_deleted" x="1764" y="0"/>
+</item>
+<item active="true" historyLabel="Server.java" index="4">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -405,13 +404,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="bottomRight"/>
-<trimItem IMemento.internal.id="topRight"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>

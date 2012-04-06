@@ -15,6 +15,15 @@ public class Session {
 		this.setExpiration(c);
 	}
 	
+	public Session(Server IPP, Integer changecount, String message, 
+			Long expiration) {
+		this.setIPP(IPP);
+		this.setChangecount(changecount);
+		this.setMessage(message);
+		this.setExpiration(expiration);
+
+	}
+	
 	public Server getPrimary() {
 		return primary;
 	}

@@ -5,18 +5,13 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Set;
 
-import session.Cookie;
-import session.HttpServletRequest;
-import session.HttpServletResponse;
 import session.Session;
 
 public class Server {
 	public InetAddress ip;
 	public Integer port;
 	private final String IPP = ip+"-"+port;
-	private static Hashtable<Integer,Session> hash;
-	private static final long expiration = 5000;
-	private static final String cookiename = "CS5300PROJECT1SESSION";
+	private static Hashtable<String,Session> hash;
 	
 	private GroupMembershipManager gmm;
 
@@ -36,50 +31,18 @@ public class Server {
 		return IPP;
 	}
 
-	public Hashtable<Integer,Session> getHash() {
+	public Hashtable<String,Session> getHash() {
 		return hash;
 	}
 
-	public void setHash(Hashtable<Integer,Session> hash) {
+	public void setHash(Hashtable<String,Session> hash) {
 		this.hash = hash;
 	}
 
-	public static String toString(Integer i) {
+	public static String toString(String i) {
 		Session hv = hash.get(i);
 		return i+"_"+hv.getIPP().toString()+"_"+hv.getChangecount()
 				+"_"+hv.getPrimary().toString()+"_"+hv.getBackup().toString();
 	}
-
-	public static Session getAndIncrement(HttpServletRequest request) {
-		long date = System.currentTimeMillis();
-		Cookie[] cookies = request.getCookies();
-		Cookie cookie = null;
-		Session session;
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				Cookie c = cookies[i];
-				if (c.getName().equals(cookiename)) {
-					cookie = c;
-				}
-			}
-		}
-		if (cookie == null) {
-			session = new Session(new Integer(0),"",expiration+date);
-		} else {
-			session = hash.get(cookie.getValue());
-			// If we are unable to get session
-			if (session == null) {
-				session = new Session(new Integer(0),"",expiration+date);
-			} else {
-				session.setChangecount(session.getChangecount()+1);
-			}
-		}
-		return session;
-	}
-
-	public static void putCookie(HttpServletResponse response, Integer i) {
-		Cookie cookie = new Cookie(cookiename, toString(i));
-		cookie.setMaxAge(600);
-		response.addCookie(cookie);
-	}
+	
 }
