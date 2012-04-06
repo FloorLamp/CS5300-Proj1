@@ -1,5 +1,7 @@
 package session;
 
+import groupMembership.HttpServletRequest;
+import groupMembership.HttpServletResponse;
 import groupMembership.Server;
 
 import java.io.UnsupportedEncodingException;
@@ -15,6 +17,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.servlet.http.*;
 
+
+@WebServlet("/SessionManager")
 public class SessionManager {
 	private static final long expiration = 5000;
 	private static final String cookiename = "CS5300PROJECT1SESSION";	
@@ -90,7 +94,7 @@ public class SessionManager {
 				sessionCleanerFrequency * 1000, sessionCleanerFrequency * 1000);
 	}
 
-	public static void donecleanup() {
+	public static void cleanup() {
 		sessionCleanerTimer.cancel();
 	}
 

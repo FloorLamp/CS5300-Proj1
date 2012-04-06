@@ -4,6 +4,6 @@
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 <fullyQualifiedTypeName name="java.util.Hashtable"/>
 <fullyQualifiedTypeName name="session.Session"/>
-<fullyQualifiedTypeName name="groupMembership.Server"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="groupMembership.Server"/>
 </qualifiedTypeNameHistroy>

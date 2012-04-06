@@ -12,7 +12,6 @@ public class Server {
 	public Integer port;
 	private final String IPP = ip+"-"+port;
 	private static Hashtable<String,Session> hash;
-	private static Integer global = 0;
 	
 	private GroupMembershipManager gmm;
 
@@ -44,14 +43,6 @@ public class Server {
 		Session hv = hash.get(i);
 		return i+"_"+hv.getIPP().toString()+"_"+hv.getChangecount()
 				+"_"+hv.getPrimary().toString()+"_"+hv.getBackup().toString();
-	}
-
-	public static Integer getGlobal() {
-		return global;
-	}
-
-	public static void setGlobal(Integer global) {
-		Server.global = global;
 	}
 	
 }

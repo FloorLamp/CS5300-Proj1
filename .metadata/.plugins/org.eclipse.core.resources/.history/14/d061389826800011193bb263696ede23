@@ -1,5 +1,7 @@
 package session;
 
+import groupMembership.HttpServletRequest;
+import groupMembership.HttpServletResponse;
 import groupMembership.Server;
 
 import java.io.UnsupportedEncodingException;

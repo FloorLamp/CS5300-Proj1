@@ -3,7 +3,6 @@ package session;
 import groupMembership.Server;
 
 public class Session {
-	private Integer sessionnum;
 	private Server IPP;
 	private Integer changecount;
 	private String message;
@@ -71,14 +70,6 @@ public class Session {
 
 	public void setIPP(Server iPP) {
 		IPP = iPP;
-	}
-
-	public Integer getSessionnum() {
-		return sessionnum;
-	}
-
-	public void setSessionnum(Integer sessionnum) {
-		this.sessionnum = sessionnum;
 	}
 	
 }
