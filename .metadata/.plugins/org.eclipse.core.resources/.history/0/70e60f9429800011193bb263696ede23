@@ -97,15 +97,13 @@ public class SessionManager {
 			return null;
 		} else {
 			if (session.getChangecount().equals(version)) {
-				readlock.unlock();
 				return session;
 			} else {
 				System.out.println(session.getChangecount() + " does not match with " + version);
-				readlock.unlock();
 				return null;
 			}
 		}
-		
+		readlock.unlock();
 	}
 
 	public static void putSession(Server s, String sessionid, String version, Integer count,

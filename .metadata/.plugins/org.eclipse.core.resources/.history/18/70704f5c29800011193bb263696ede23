@@ -2,8 +2,14 @@ package session;
 
 import groupMembership.Server;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Timer;
+import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -65,8 +71,8 @@ public class SessionManager {
 		Cookie[] cookies = request.getCookies();
 		Cookie cookie = null;
 		if (cookies != null) {
-			for (int is = 0; is < cookies.length; is++) {
-				Cookie c = cookies[is];
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie c = cookies[i];
 				if (c.getName().equals(cookiename)) {
 					cookie = c;
 				}
@@ -97,15 +103,13 @@ public class SessionManager {
 			return null;
 		} else {
 			if (session.getChangecount().equals(version)) {
-				readlock.unlock();
 				return session;
 			} else {
 				System.out.println(session.getChangecount() + " does not match with " + version);
-				readlock.unlock();
 				return null;
 			}
 		}
-		
+		readlock.unlock();
 	}
 
 	public static void putSession(Server s, String sessionid, String version, Integer count,
