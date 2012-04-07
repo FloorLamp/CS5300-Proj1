@@ -51,21 +51,6 @@ public class SessionManager {
 		writelock.unlock();
 	}
 	
-	public static void sessionWriteBackup(String SID, String message, Integer version, Long expire) {
-		System.out.println("server adding session: " + SID +"," + version);
-		writelock.lock();
-		Session session = hash.get(SID);
-		if (session == null) {
-			session = new Session(version,message,expire);
-			hash.put(SID,session);
-		}
-		session.setChangecount(version);
-		session.setMessage(message);
-		session.setExpiration(expire);
-		hash.put(SID, session);
-		writelock.unlock();
-	}
-	
 	public static void sessionDelete(String SID, Integer change_count) {
 		System.out.println("Server trying to delete: " + SID + "," + change_count);
 		writelock.lock();

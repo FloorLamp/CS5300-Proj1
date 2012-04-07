@@ -52,6 +52,7 @@ public class SessionManager {
 	}
 	
 	public static void sessionWriteBackup(String SID, String message, Integer version, Long expire) {
+		long now = System.currentTimeMillis();
 		System.out.println("server adding session: " + SID +"," + version);
 		writelock.lock();
 		Session session = hash.get(SID);
