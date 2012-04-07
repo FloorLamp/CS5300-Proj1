@@ -18,13 +18,17 @@ import java.net.URLDecoder;
 import java.util.UUID;
 
 import session.Session;
+import session.SessionManager;
 
 public class RPCClient {
 	
 	public final static int TIMEOUT = 1500;
-	public final static int OPERATION_PROBE = 0;
+	
+	public final static int OPERATION_NOOP = 0;
 	public final static int OPERATION_SESSIONREAD = 1;
-	public final static int OPERATION_SESSIONPUT = 2;
+	public final static int OPERATION_SESSIONWRITE = 2;
+	public final static int OPERATION_SESSIONDELETE = 3;
+	
 	public final static int MAX_PACKET_SIZE = 4096;
 	//private final static int OPERATION_SESSIONREAD = 1;
 
@@ -40,9 +44,8 @@ public class RPCClient {
 	   
 	      //generate unique id for call
 	      String callID = UUID.randomUUID().toString();
-	      // byte[] outBuf = new byte[4096];
-
-	      String outstr = (callID + "," + OPERATION_PROBE + ",0,0");
+	     
+	      String outstr = (callID + "," + OPERATION_NOOP + ",0,0");
 	      byte[] outBuf = RPCClient.marshal(outstr);
 
 	      //String newstr = RPCClient.unmarshal(outBuf);
@@ -54,6 +57,9 @@ public class RPCClient {
 	        e.printStackTrace();
 	      }
 	      
+	      //-----------------------------------------------------
+		  //waiting for response
+		      
 	      byte[] inBuf = new byte[MAX_PACKET_SIZE];
 	      DatagramPacket recvPkt = new DatagramPacket(inBuf, inBuf.length);
 	      
@@ -63,14 +69,15 @@ public class RPCClient {
 	          recvPkt.setLength(inBuf.length);
 	          rpcSocket.receive(recvPkt);
 	        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
-	      } catch (IOException e1) {
+	      } catch (IOException e) {
 	        recvPkt = null;
 	        return false;
 	      }
-	    } catch (SocketException e) {
-	      e.printStackTrace();
-	      return false;
-	    }
+	      
+	      } catch (SocketException e) {
+	    	  e.printStackTrace();
+	    	  return false;
+	      }
 
 	    return true;		
 		
@@ -79,9 +86,10 @@ public class RPCClient {
 	
 	
 	
-	public static Session sessionRead(Session s){
+	public static Session sessionRead(String sID, int version){
 		
 		try{
+			Session s = SessionManager.sessionRead(sID, version);
 			
 			DatagramSocket socket = new DatagramSocket();
 			socket.setSoTimeout(TIMEOUT);
@@ -90,17 +98,21 @@ public class RPCClient {
 			String callID = UUID.randomUUID().toString();
 			
 			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum ]
-			String temp = callID + "," + OPERATION_SESSIONREAD + "," + s.getPrimary() + "," + s.getChangecount();
+			String temp = callID + "," + OPERATION_SESSIONREAD + "," + sID + "," + version;
 			byte[] outBuf = marshal(temp);
 			
-			for( Server serv : s.locations ) {
-			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, destAddr, destPort)
+			//for all the servers in the group membership
+			for( Server serv : s.getIPP(). ) {
+			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, serv.ip, serv.port);
 			    try{
 			    	socket.send(sendPkt);
 			    } catch (Exception e){
 			    	e.printStackTrace();
 			    }
 			}
+			
+			//-----------------------------------------------------
+			//waiting for response
 			
 			byte [] inBuf = new byte[MAX_PACKET_SIZE];
 			DatagramPacket recvPkt = new DatagramPacket(inBuf, inBuf.length);
@@ -133,7 +145,8 @@ public class RPCClient {
 			    ioe.printStackTrace();
 			
 			}
-				
+			//----------------------------------------------------------
+			
 			return s;
 					  
 		} catch (Exception e) {
@@ -144,7 +157,107 @@ public class RPCClient {
 		
 	}
 
+	
+	
+	
+	public static boolean sessionWrite(String sID, int version, long discard_time){
+		try {
+			//GroupMembershipManager.
+			int numServers = 0; //change this
+			
+			DatagramSocket rpcSocket = new DatagramSocket();
+			rpcSocket.setSoTimeout(TIMEOUT);
+			
+			//generate unique id for call
+			String callID = UUID.randomUUID().toString();
+			
+			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum, discardtime ]
+			String temp = callID + "," + OPERATION_SESSIONWRITE + "," + sID + "," + version + "," + discard_time;
+			byte[] outBuf = marshal(temp);
+			
+			
+			//send the data packets
+			
+			
+			//-----------------------------------------------------
+			//waiting for response
+			
+		      byte[] inBuf = new byte[MAX_PACKET_SIZE];
+		      DatagramPacket recvPkt = new DatagramPacket(inBuf, inBuf.length);
+		      
+		      try {
+		    	  
+		        do {
+		          recvPkt.setLength(inBuf.length);
+		          rpcSocket.receive(recvPkt);
+		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
+		      } catch (IOException e) {
+		        recvPkt = null;
+		        return false;
+		      }
+		      
+		      } catch (SocketException e) {
+		    	  e.printStackTrace();
+		    	  return false;
+		      }
+		
+			//----------------------------------------------------------
+			
+			return true;
 
+		
+	}
+
+	public static boolean sessionDelete(Server s, String sID, int version){
+		try {
+
+			DatagramSocket rpcSocket = new DatagramSocket();
+			rpcSocket.setSoTimeout(TIMEOUT);
+			
+			//generate unique id for call
+			String callID = UUID.randomUUID().toString();
+			
+			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum ]
+			String temp = callID + "," + OPERATION_SESSIONDELETE + "," + sID + "," + version;
+			byte[] outBuf = marshal(temp);
+			
+
+			//String newstr = RPCClient.unmarshal(outBuf);
+			DatagramPacket sendPkt;
+			try {
+			  sendPkt = new DatagramPacket(outBuf, outBuf.length, s.ip, s.port);
+			  rpcSocket.send(sendPkt);
+			} catch (IOException e) {
+			  e.printStackTrace();
+			}
+		      
+			//-----------------------------------------------------
+			//waiting for response
+			
+		      byte[] inBuf = new byte[MAX_PACKET_SIZE];
+		      DatagramPacket recvPkt = new DatagramPacket(inBuf, inBuf.length);
+		      
+		      try {
+		    	  
+		        do {
+		          recvPkt.setLength(inBuf.length);
+		          rpcSocket.receive(recvPkt);
+		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
+		      } catch (IOException e) {
+		        recvPkt = null;
+		        return false;
+		      }
+		      
+		      } catch (SocketException e) {
+		    	  e.printStackTrace();
+		    	  return false;
+		      }
+		
+			//----------------------------------------------------------
+		return true;
+	}
+	
+	
 	public static byte[] marshal(String s){
 	
 	    try {

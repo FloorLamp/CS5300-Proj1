@@ -12,6 +12,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import session.Session;
+import session.SessionManager;
 
 public class RPCServer implements Runnable{
 
@@ -44,7 +45,7 @@ public class RPCServer implements Runnable{
 
 				//compute response
 				byte [] data = recvPkt.getData();
-				int datalength = recvPkt.getLength();
+				//int datalength = recvPkt.getLength();
 				
 				//parse packet data
 				String[] requests = RPCClient.unmarshal(data).split(",");
@@ -53,16 +54,19 @@ public class RPCServer implements Runnable{
 				int operationCode = Integer.parseInt(requests[1]);
 				String sID = requests[2];
 				String sVersion = requests[3];
+				//String discard_time = requests[4];
 				String response = null;
 				Session session = null;
 				
 				switch( operationCode ) {
-					case RPCClient.OPERATION_PROBE:
+				
+					case RPCClient.OPERATION_NOOP:
 						response = callID;
 					break;
+					
 					case RPCClient.OPERATION_SESSIONREAD:
 						//get session by id
-						session = Server.getHash().get(sID);
+						session = SessionManager.sessionRead(sID, Integer.parseInt(sVersion));
 						if (session == null){
 							response = null;
 						} else {
@@ -77,19 +81,28 @@ public class RPCServer implements Runnable{
 							
 						}
 					break;
-					case RPCClient.OPERATION_SESSIONPUT:
-						String count = null;
+					
+					case RPCClient.OPERATION_SESSIONWRITE:
 				        String message = null;
+				        String discard_time = null;
 				        try {
-				          count = URLDecoder.decode(requests[4],"UTF-8");
-				          message = URLDecoder.decode(requests[5],"UTF-8");
+				          message = URLDecoder.decode(requests[4],"UTF-8");
+				          discard_time = URLDecoder.decode(requests[4],"UTF-8");
 				        } catch (UnsupportedEncodingException e) {
 				          // TODO Auto-generated catch block
 				          e.printStackTrace();
 				        }
 				        //put session (sessionid,sessionversion,count,message)
+				        SessionManager.sessionWriteBackup(sID,message,Integer.parseInt(sVersion), Long.parseLong(discard_time));
 						response = callID;
 				 	break;
+				 	
+					case RPCClient.OPERATION_SESSIONDELETE:
+						SessionManager.sessionDelete(sID, (Integer.parseInt(sVersion)));
+						response = callID;
+						
+					break;
+						
 				 
 				}
 				
