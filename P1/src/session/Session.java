@@ -81,4 +81,9 @@ public class Session {
 		this.sessionnum = sessionnum;
 	}
 	
+	public String toString() {
+		return sessionnum+"_"+IPP.toString()+"_"+changecount+
+				"_"+primary.toString()+"_"+backup.toString();
+	}
+	
 }
