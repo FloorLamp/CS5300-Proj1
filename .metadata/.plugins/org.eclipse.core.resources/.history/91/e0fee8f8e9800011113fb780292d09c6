@@ -1,5 +1,7 @@
 package session;
 
+import groupMembership.Server;
+
 import java.util.Hashtable;
 import java.util.Timer;
 import java.util.concurrent.locks.Lock;
@@ -13,12 +15,13 @@ public class SessionManager {
 	protected static final Integer sessionTimeout = 600; // Timeout time in seconds
 	protected static final Integer sessionCleanerFrequency = 60; // Delay in
 
+	// Locks for session table
 	protected static final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	protected static final Lock readlock = rwl.readLock();
 	protected static final Lock writelock = rwl.writeLock();
-	private static Integer global = 0;
 	protected static final Hashtable<String, Session> hash = new Hashtable<String, Session>();
 
+	// Sweeper for session cleanup
 	protected static final SessionCleaner sessionCleaner = new SessionCleaner();
 	protected static final Timer sessionCleanerTimer = new Timer();
 
@@ -51,14 +54,7 @@ public class SessionManager {
 		writelock.unlock();
 	}
 	
-	public static void sessionDelete(String SID, Integer change_count) {
-		System.out.println("Server trying to delete: " + SID + "," + change_count);
-		writelock.lock();
-		hash.remove(SID);
-		writelock.unlock();
-	}
-	 
-	public static Session getAndIncrement(HttpServletRequest request) {
+	public static Session getAndIncrement(HttpServletRequest request, Server s) {
 		long date = System.currentTimeMillis();
 		Cookie[] cookies = request.getCookies();
 		Cookie cookie = null;
@@ -72,20 +68,22 @@ public class SessionManager {
 			}
 		}
 		if (cookie == null) {
-			session = new Session(new Integer(0),"",expiration+date);
-			session.setSessionnum(global);
-			global++;			
+			session = new Session(s,new Integer(0),"",expiration+date);
+			session.setPrimary(s);
+			session.setSessionnum(s.getGlobal());
+			int global = s.getGlobal()+1;
+			s.setGlobal(global);
 		} else {
 			readlock.lock();
-			String value = cookie.getValue();
-			String[] split = value.split("_");
-			session = hash.get(split[0]+"_"+split[1]);
+			session = s.getHash().get(cookie.getValue());
 			readlock.unlock();
 			// If we are unable to get session
 			if (session == null) {
-				session = new Session(new Integer(0),"",expiration+date);
-				session.setSessionnum(global);
-				global++;
+				session = new Session(s,new Integer(0),"",expiration+date);
+				session.setPrimary(s);
+				session.setSessionnum(s.getGlobal());
+				int global = s.getGlobal()+1;
+				s.setGlobal(global);
 			} else {
 				session.setChangecount(session.getChangecount()+1);
 				session.setExpiration(expiration+date);

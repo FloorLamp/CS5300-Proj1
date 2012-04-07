@@ -1,5 +1,8 @@
 package session;
 
+import groupMembership.Server;
+import groupMembership.GroupMembershipManager;
+
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;

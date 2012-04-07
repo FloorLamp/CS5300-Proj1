@@ -13,12 +13,14 @@ public class SessionManager {
 	protected static final Integer sessionTimeout = 600; // Timeout time in seconds
 	protected static final Integer sessionCleanerFrequency = 60; // Delay in
 
+	// Locks for session table
 	protected static final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	protected static final Lock readlock = rwl.readLock();
 	protected static final Lock writelock = rwl.writeLock();
-	private static Integer global = 0;
 	protected static final Hashtable<String, Session> hash = new Hashtable<String, Session>();
+	private static Integer global = 0;
 
+	// Sweeper for session cleanup
 	protected static final SessionCleaner sessionCleaner = new SessionCleaner();
 	protected static final Timer sessionCleanerTimer = new Timer();
 

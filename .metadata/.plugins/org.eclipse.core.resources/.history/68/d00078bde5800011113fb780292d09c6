@@ -11,6 +11,7 @@ public class Server {
 	public InetAddress ip;
 	public Integer port;
 	private final String IPP = ip+"-"+port;
+	private static Hashtable<String,Session> hash;
 	private static Integer global = 0;
 	private final static String IPPnull = "000000000-0";
 	
@@ -30,6 +31,14 @@ public class Server {
 	
 	public String toString() {
 		return IPP;
+	}
+
+	public static Hashtable<String,Session> getHash() {
+		return hash;
+	}
+
+	public static void setHash(Hashtable<String,Session> hashs) {
+		hash = hashs;
 	}
 
 	public static Integer getGlobal() {

@@ -1,5 +1,7 @@
 package session;
 
+import groupMembership.Server;
+
 import java.util.Hashtable;
 import java.util.Timer;
 import java.util.concurrent.locks.Lock;
@@ -13,52 +15,50 @@ public class SessionManager {
 	protected static final Integer sessionTimeout = 600; // Timeout time in seconds
 	protected static final Integer sessionCleanerFrequency = 60; // Delay in
 
+
+	// Locks for session table
 	protected static final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	protected static final Lock readlock = rwl.readLock();
 	protected static final Lock writelock = rwl.writeLock();
-	private static Integer global = 0;
-	protected static final Hashtable<String, Session> hash = new Hashtable<String, Session>();
 
+	// Sweeper for session cleanup
 	protected static final SessionCleaner sessionCleaner = new SessionCleaner();
 	protected static final Timer sessionCleanerTimer = new Timer();
 
-	public static Session sessionRead(String SID, Integer change_count) {
-		System.out.println("Server trying to retrieve: " + SID + "," + change_count);
+	public static Session sessionRead(String SID, Integer change_count, Server s, 
+			Server t, int choice) {
+		Hashtable<String,Session> hashtable;
+		Session sess = null;
+		String key = SID+"_"+change_count+"_"+s.toString()+"-"+t.toString();
+		System.out.println("Server trying to retrieve: " + SID);
 		readlock.lock();
-		Session session = hash.get(SID);
-		if (session==null) { 
-			readlock.unlock();
-			return null; }
-		else { 
-			readlock.unlock();
-			return session; 
-		}	
-	}
-	
-	public static void sessionWrite(String SID, String message, Integer version) {
-		long now = System.currentTimeMillis();
-		System.out.println("server adding session: " + SID +"," + version);
-		writelock.lock();
-		Session session = hash.get(SID);
-		if (session == null) {
-			session = new Session(version,message,now+expiration);
-			hash.put(SID,session);
+		if (choice==1) {
+			hashtable = s.getHash();
 		}
-		session.setChangecount(version);
-		session.setMessage(message);
-		session.setExpiration(now+expiration);
-		hash.put(SID, session);
+		else {
+			hashtable = t.getHash();
+		}
+		sess = hashtable.get(key);
+		readlock.unlock();
+		return sess;
+	}
+	
+	public static void sessionWrite(Server s, Session oldsess, Session newsess) {
+		System.out.println("server adding session: " + newsess.toString());
+		writelock.lock();
+		Hashtable<String,Session> h = s.getHash();
+		Session session = s.getHash().get(oldsess.toString());
+		if (session == null) {
+			h.put(newsess.toString(), newsess);
+		}
+		else {
+			h.remove(oldsess.toString());
+			h.put(newsess.toString(), newsess);
+		}
 		writelock.unlock();
 	}
 	
-	public static void sessionDelete(String SID, Integer change_count) {
-		System.out.println("Server trying to delete: " + SID + "," + change_count);
-		writelock.lock();
-		hash.remove(SID);
-		writelock.unlock();
-	}
-	 
-	public static Session getAndIncrement(HttpServletRequest request) {
+	public static Session getAndIncrement(HttpServletRequest request, Server s) {
 		long date = System.currentTimeMillis();
 		Cookie[] cookies = request.getCookies();
 		Cookie cookie = null;
@@ -72,20 +72,22 @@ public class SessionManager {
 			}
 		}
 		if (cookie == null) {
-			session = new Session(new Integer(0),"",expiration+date);
-			session.setSessionnum(global);
-			global++;			
+			session = new Session(s,new Integer(0),"",expiration+date);
+			session.setPrimary(s);
+			session.setSessionnum(s.getGlobal());
+			int global = s.getGlobal()+1;
+			s.setGlobal(global);
 		} else {
 			readlock.lock();
-			String value = cookie.getValue();
-			String[] split = value.split("_");
-			session = hash.get(split[0]+"_"+split[1]);
+			session = s.getHash().get(cookie.getValue());
 			readlock.unlock();
 			// If we are unable to get session
 			if (session == null) {
-				session = new Session(new Integer(0),"",expiration+date);
-				session.setSessionnum(global);
-				global++;
+				session = new Session(s,new Integer(0),"",expiration+date);
+				session.setPrimary(s);
+				session.setSessionnum(s.getGlobal());
+				int global = s.getGlobal()+1;
+				s.setGlobal(global);
 			} else {
 				session.setChangecount(session.getChangecount()+1);
 				session.setExpiration(expiration+date);
