@@ -32,12 +32,12 @@ public class Server {
 		return IPP;
 	}
 
-	public static Hashtable<String,Session> getHash() {
+	public Hashtable<String,Session> getHash() {
 		return hash;
 	}
 
-	public static void setHash(Hashtable<String,Session> hashs) {
-		hash = hashs;
+	public void setHash(Hashtable<String,Session> hash) {
+		this.hash = hash;
 	}
 
 	public static String toString(String i) {

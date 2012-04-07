@@ -36,8 +36,8 @@ public class Server {
 		return hash;
 	}
 
-	public static void setHash(Hashtable<String,Session> hashs) {
-		hash = hashs;
+	public static void setHash(Hashtable<String,Session> hash) {
+		this.hash = hash;
 	}
 
 	public static String toString(String i) {
