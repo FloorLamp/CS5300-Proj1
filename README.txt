@@ -1,7 +1,7 @@
 Wences - session tables/read/write/update table
 Ethan - RPC
 Jasdeep - Cache
-Norton - Group Membership - mostly done, need RPC signatures
+Norton - Group Membership
 
 Server
 Each server will have an IP number and port number.
@@ -22,3 +22,6 @@ Garbage collect functions
 -The garbage collect function will have a periodic time and run periodically. Every
 time it runs, it will obtain the lock and lock the table until it is done. Then there 
 be no conflicts between updating, writing and garbage collecting.
+
+SimpleDB
+Our SimpleDB hbas domain "CS5300PROJECT1BSDBMbrList" with one item "members" with attribute "ipps". The value is a single string of all members separated by an underscore.

@@ -15,7 +15,7 @@ import com.amazonaws.services.simpledb.*;
 import com.amazonaws.services.simpledb.model.*;
 
 public class GroupMembershipManager extends Thread {
-	public boolean running = true;
+	protected boolean running = true;
 
 	protected static final String MBR_LIST_DOMAIN = "CS5300PROJECT1BSDBMbrList";
 	protected static final String MBR_LIST_ITEM = "members";
@@ -79,7 +79,7 @@ public class GroupMembershipManager extends Thread {
 		return mbrList.substring(0, mbrList.length() - 1);
 	}
 	
-	private void refreshMembers() {
+	protected void refreshMembers() {
 		MbrSet.clear();
 		
 		try {
