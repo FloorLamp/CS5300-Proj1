@@ -4,9 +4,12 @@ Jasdeep - Cache
 Norton - Group Membership - mostly done, need RPC signatures
 
 Server
-Each server will have a concurrent hash table with cookie values as the key and a class
-called Sessions as the value. The session class contains the ID, message, expiration 
-date, primary and backup servers.
+Each server will have an IP number and port number.
+
+Session Manager
+-Contains a concurrent hashtable with cookie values as the key and a class called sessions
+as the value. The session clas contains the ID, message, expiration, date, primary and
+backup servers.
 
 Session functions
 -Get and increment: It will update the message and version count.
