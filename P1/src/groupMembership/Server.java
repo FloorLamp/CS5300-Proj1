@@ -38,6 +38,14 @@ public class Server {
 		return gmm.getMbrSet();
 	}
 	
+	public void refreshMembership() {
+		gmm.refreshMembers();
+	}
+	
+	public void setGroupMembershipRunning(boolean running) {
+		gmm.running = running;
+	}
+	
 	public String toString() {
 		return IPP;
 	}
