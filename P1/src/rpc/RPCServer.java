@@ -13,6 +13,7 @@ import session.Session;
 import session.SessionManager;
 
 public class RPCServer implements Runnable{
+	public boolean running = true;
 
 	private DatagramSocket rpcSocket;
 	private int serverPort;
@@ -26,10 +27,14 @@ public class RPCServer implements Runnable{
 		}
 	}
 	
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
 	@Override
 	public void run() {
 		
-		while(true) {
+		while(running) {
 			byte[] inBuf = new byte[RPCClient.MAX_PACKET_SIZE];
 			byte[] outBuf = new byte[RPCClient.MAX_PACKET_SIZE];
 			
