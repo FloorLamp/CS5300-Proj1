@@ -25,3 +25,10 @@ be no conflicts between updating, writing and garbage collecting.
 
 SimpleDB
 Our SimpleDB hbas domain "CS5300PROJECT1BSDBMbrList" with one item "members" with attribute "ipps". The value is a single string of all members separated by an underscore.
+
+RPCClient and RPCServer
+
+RPCClient contains the SessionRead, SessionWrite, SessionDelete, and Noop functions. The messages, defined by a UUID- generated callID and a corresponding operation code, are marshalled into byte[] and sent as UDP packet. RPCClient waits for a response and unmarshals the packet. Noop returns successfully, sessionRead returns session data, and sessionWrite/sessionDelete return successfully. 
+
+The RPC Server loops continuously and processes requests based on the operation code. It writes a session for sessionWrite (along with the discard time), retreivs a session for sessionWrite, deletes a session for sessionDelete, and simply returns a callID packet for Noop to acknowledge the request. RPC messages are a string marshalled into a byte[], with callID, operation code, and other data separated by underscores ("_").
+
