@@ -1,12 +1,15 @@
 Wences - session tables/read/write/update table
 Ethan - RPC
 Jasdeep - Cache
-Norton - Group Membership - mostly done, need RPC signatures
+Norton - Group Membership
 
 Server
-Each server will have a concurrent hash table with cookie values as the key and a class
-called Sessions as the value. The session class contains the ID, message, expiration 
-date, primary and backup servers.
+Each server will have an IP number and port number.
+
+Session Manager
+-Contains a concurrent hashtable with cookie values as the key and a class called sessions
+as the value. The session clas contains the ID, message, expiration, date, primary and
+backup servers.
 
 Session functions
 -Get and increment: It will update the message and version count.
@@ -19,3 +22,6 @@ Garbage collect functions
 -The garbage collect function will have a periodic time and run periodically. Every
 time it runs, it will obtain the lock and lock the table until it is done. Then there 
 be no conflicts between updating, writing and garbage collecting.
+
+SimpleDB
+Our SimpleDB hbas domain "CS5300PROJECT1BSDBMbrList" with one item "members" with attribute "ipps". The value is a single string of all members separated by an underscore.

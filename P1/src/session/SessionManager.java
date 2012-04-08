@@ -1,7 +1,7 @@
 package session;
 
-import java.util.Hashtable;
 import java.util.Timer;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -17,7 +17,7 @@ public class SessionManager {
 	protected static final Lock readlock = rwl.readLock();
 	protected static final Lock writelock = rwl.writeLock();
 	private static Integer global = 0;
-	protected static final Hashtable<String, Session> hash = new Hashtable<String, Session>();
+	protected static final ConcurrentHashMap<String, Session> hash = new ConcurrentHashMap<String, Session>();
 
 	protected static final SessionCleaner sessionCleaner = new SessionCleaner();
 	protected static final Timer sessionCleanerTimer = new Timer();
