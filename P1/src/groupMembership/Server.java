@@ -19,11 +19,22 @@ public class Server {
 		ip = sip;
 		port = sport;
 		
-		gmm = new GroupMembershipManager(this.toString());
+		gmm = new GroupMembershipManager(this);
 		gmm.start();
 	}
+	
+	// Does not start a group membership manager. Used by gmm
+	public Server(String address) {
+		String[] addr = address.split("-");
+		try {
+			ip = InetAddress.getByName(addr[0]);
+			port = Integer.parseInt(addr[1]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	public Set<String> getMbrSet() {
+	public Set<Server> getMbrSet() {
 		return gmm.getMbrSet();
 	}
 	

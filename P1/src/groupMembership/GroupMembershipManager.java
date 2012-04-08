@@ -1,6 +1,8 @@
 package groupMembership;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,12 +23,12 @@ public class GroupMembershipManager extends Thread {
 	protected static final int NO_OP_ITERATIONS = 2;
 	protected static final int ROUND_TIME = 10; // seconds
 
-	private String server;
+	private Server server;
 	private AmazonSimpleDB sdb;
-	private Set<String> MbrSet = new HashSet<String>();
+	private Set<Server> MbrSet = new HashSet<Server>();
 	private static Random rand = new Random();
 	
-	protected GroupMembershipManager(String server) {
+	public GroupMembershipManager(Server server) {
 		this.server = server;
 		
 		try {
@@ -42,7 +44,7 @@ public class GroupMembershipManager extends Thread {
 		setDaemon(true);
 	}
 	
-	protected Set<String> getMbrSet() {
+	public Set<Server> getMbrSet() {
 		return MbrSet;
 	}
 	
@@ -57,12 +59,12 @@ public class GroupMembershipManager extends Thread {
 		}
 	}
 	
-	private List<String> parseMembers(String mbrList) {
-		List<String> members = new ArrayList<String>();
+	private List<Server> parseMembers(String mbrList) {
+		List<Server> members = new ArrayList<Server>();
 		
 		if (mbrList.length() > 0) {
 			for (String s : mbrList.split("_")) {
-				members.add(s);
+				members.add(new Server(s));
 			}
 		}
 		return members;
@@ -71,8 +73,8 @@ public class GroupMembershipManager extends Thread {
 	private String encodeMemberList() {
 		String mbrList = "";
 		
-		for (String member : MbrSet) {
-			mbrList += (member + "_");
+		for (Server member : MbrSet) {
+			mbrList += (member.toString() + "_");
 		}
 		return mbrList.substring(0, mbrList.length() - 1);
 	}
@@ -87,10 +89,9 @@ public class GroupMembershipManager extends Thread {
 			System.out.println("server " + server + " sdbmbr: " + SDBMbrList + " has results: " + hasResults);
 			String mbrs = hasResults ? SDBMbrList.get(0).getValue() :  ""; 
 			
-			// TODO change to actual NoOp call
-			for (String mbr : parseMembers(mbrs)) {
+			for (Server mbr : parseMembers(mbrs)) {
 				for (int i = 0; i < NO_OP_ITERATIONS; i++) {
-					if (!mbr.equals(server) && "rpc.RPCClient.NoOp(mbr)" != null) {
+					if (!mbr.equals(server) && rpc.RPCClient.noop(mbr)) {
 						MbrSet.add(mbr);
 					}
 				}
