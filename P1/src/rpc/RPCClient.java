@@ -15,6 +15,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 import session.Session;
@@ -45,7 +46,7 @@ public class RPCClient {
 	      //generate unique id for call
 	      String callID = UUID.randomUUID().toString();
 	     
-	      String outstr = (callID + "," + OPERATION_NOOP + ",0,0");
+	      String outstr = (callID + "_" + OPERATION_NOOP + ",0,0");
 	      byte[] outBuf = RPCClient.marshal(outstr);
 
 	      //String newstr = RPCClient.unmarshal(outBuf);
@@ -68,7 +69,7 @@ public class RPCClient {
 	        do {
 	          recvPkt.setLength(inBuf.length);
 	          rpcSocket.receive(recvPkt);
-	        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
+	        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split("_")[0].equals(callID));
 	      } catch (IOException e) {
 	        recvPkt = null;
 	        return false;
@@ -98,11 +99,11 @@ public class RPCClient {
 			String callID = UUID.randomUUID().toString();
 			
 			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum ]
-			String temp = callID + "," + OPERATION_SESSIONREAD + "," + sID + "," + version;
+			String temp = callID + "_" + OPERATION_SESSIONREAD + "_" + sID + "_" + version;
 			byte[] outBuf = marshal(temp);
 			
 			//for all the servers in the group membership
-			for( Server serv : s.getIPP(). ) {
+			for( Server serv : s.getIPP().getMbrSet() ) {
 			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, serv.ip, serv.port);
 			    try{
 			    	socket.send(sendPkt);
@@ -130,16 +131,12 @@ public class RPCClient {
 						e.printStackTrace();
 						return null;
 					}
-			    } while( response == null || !(response.split(",")[0].equals(callID)) );
+			    } while( response == null || !(response.split("_")[0].equals(callID)) );
 			
-				String[] responses = response.split(",");
+				String[] responses = response.split("_");
 				s.setMessage(URLDecoder.decode(responses[2],"UTF-8"));
-				s.setChangecount(Integer.parseInt(responses[1]));
+				s.setChangecount(Integer.parseInt(URLDecoder.decode(responses[1], "UTF-8")));
 				
-			} catch(InterruptedIOException iioe) {
-			    // timeout 
-			    recvPkt = null;
-			    
 			} catch(IOException ioe) {
 				
 			    ioe.printStackTrace();
@@ -162,9 +159,9 @@ public class RPCClient {
 	
 	public static boolean sessionWrite(String sID, int version, long discard_time){
 		try {
-			//GroupMembershipManager.
-			int numServers = 0; //change this
+			Session s = SessionManager.sessionRead(sID, version);
 			
+
 			DatagramSocket rpcSocket = new DatagramSocket();
 			rpcSocket.setSoTimeout(TIMEOUT);
 			
@@ -172,12 +169,20 @@ public class RPCClient {
 			String callID = UUID.randomUUID().toString();
 			
 			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum, discardtime ]
-			String temp = callID + "," + OPERATION_SESSIONWRITE + "," + sID + "," + version + "," + discard_time;
+			String temp = callID + "_" + OPERATION_SESSIONWRITE + "_" + sID + "_" + version + "_" + URLEncoder.encode(s.getMessage(), "UTF-8") + "_" + discard_time;
 			byte[] outBuf = marshal(temp);
 			
 			
 			//send the data packets
-			
+			//for all the servers in the group membership
+			for( Server serv : s.getIPP().getMbrSet() ) {
+			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, serv.ip, serv.port);
+			    try{
+			    	rpcSocket.send(sendPkt);
+			    } catch (Exception e){
+			    	e.printStackTrace();
+			    }
+			}
 			
 			//-----------------------------------------------------
 			//waiting for response
@@ -190,7 +195,7 @@ public class RPCClient {
 		        do {
 		          recvPkt.setLength(inBuf.length);
 		          rpcSocket.receive(recvPkt);
-		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
+		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split("_")[0].equals(callID));
 		      } catch (IOException e) {
 		        recvPkt = null;
 		        return false;
@@ -199,7 +204,9 @@ public class RPCClient {
 		      } catch (SocketException e) {
 		    	  e.printStackTrace();
 		    	  return false;
-		      }
+		      } catch (UnsupportedEncodingException e) {
+		    	  e.printStackTrace();
+			  }
 		
 			//----------------------------------------------------------
 			
@@ -218,7 +225,7 @@ public class RPCClient {
 			String callID = UUID.randomUUID().toString();
 			
 			//fill outBuf with [ callID, operationSESSIONREAD, sessionID, sessionVersionNum ]
-			String temp = callID + "," + OPERATION_SESSIONDELETE + "," + sID + "," + version;
+			String temp = callID + "_" + OPERATION_SESSIONDELETE + "_" + sID + "_" + version;
 			byte[] outBuf = marshal(temp);
 			
 
@@ -242,7 +249,7 @@ public class RPCClient {
 		        do {
 		          recvPkt.setLength(inBuf.length);
 		          rpcSocket.receive(recvPkt);
-		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split(",")[0].equals(callID));
+		        } while ( !(RPCClient.unmarshal(recvPkt.getData())).split("_")[0].equals(callID));
 		      } catch (IOException e) {
 		        recvPkt = null;
 		        return false;

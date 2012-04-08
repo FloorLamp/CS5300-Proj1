@@ -1,7 +1,5 @@
 package rpc;
 
-import groupMembership.Server;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
@@ -48,7 +46,7 @@ public class RPCServer implements Runnable{
 				//int datalength = recvPkt.getLength();
 				
 				//parse packet data
-				String[] requests = RPCClient.unmarshal(data).split(",");
+				String[] requests = RPCClient.unmarshal(data).split("_");
 				
 				String callID = requests[0];
 				int operationCode = Integer.parseInt(requests[1]);
@@ -72,8 +70,8 @@ public class RPCServer implements Runnable{
 						} else {
 							response = callID;
 							try {
-					            response += "," + URLEncoder.encode(session.getChangecount().toString(),"UTF-8");
-					            response += "," + URLEncoder.encode(session.getMessage(),"UTF-8");
+					            response += "_" + URLEncoder.encode(session.getChangecount().toString(),"UTF-8");
+					            response += "_" + URLEncoder.encode(session.getMessage(),"UTF-8");
 					          } catch (UnsupportedEncodingException e) {
 					            // TODO Auto-generated catch block
 					            e.printStackTrace();
@@ -87,7 +85,7 @@ public class RPCServer implements Runnable{
 				        String discard_time = null;
 				        try {
 				          message = URLDecoder.decode(requests[4],"UTF-8");
-				          discard_time = URLDecoder.decode(requests[4],"UTF-8");
+				          discard_time = requests[5];
 				        } catch (UnsupportedEncodingException e) {
 				          // TODO Auto-generated catch block
 				          e.printStackTrace();
