@@ -72,6 +72,10 @@ public class Session {
 		this.sessionnum = sessionnum;
 	}
 	
+	public String getSID() {
+		return this.sessionnum.toString() + this.IPP.toString();
+	}
+	
 	public String toString() {
 		return sessionnum+"_"+IPP.toString()+"_"+changecount+
 				"_"+primary.toString()+"_"+backup.toString();

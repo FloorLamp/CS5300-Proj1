@@ -78,12 +78,9 @@ public class Project1 extends HttpServlet {
     session.setMessage(message);
     session.setChangecount(count);
 
-    // Attempt put
-    if (RPCClient.put(session) == null) {
-      // If put fails, try putting to as many as possible
-      session.setLocations(GroupMembershipManager.getMbrSet());
-      RPCClient.put(session);
-    }
+    
+    RPCClient.sessionWrite(session.getSID(),session.getChangecount(),session.getExpiration());
+    
     // Write back cookie
     SessionManager.putCookie(response, session);
 
