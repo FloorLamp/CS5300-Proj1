@@ -9,37 +9,9 @@ public class Server {
 	private final String IPP = ip+"-"+port;
 	private final static String IPPnull = "000000000-0";
 	
-	private GroupMembershipManager gmm;
-
 	public Server(InetAddress sip, int sport) {
 		ip = sip;
-		port = sport;
-		
-		gmm = new GroupMembershipManager(this);
-		gmm.start();
-	}
-	
-	// Does not start a group membership manager. Used by gmm
-	public Server(String address) {
-		String[] addr = address.split("-");
-		try {
-			ip = InetAddress.getByName(addr[0]);
-			port = Integer.parseInt(addr[1]);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Set<Server> getMbrSet() {
-		return gmm.getMbrSet();
-	}
-	
-	public void refreshMembership() {
-		gmm.refreshMembers();
-	}
-	
-	public void setGroupMembershipRunning(boolean running) {
-		gmm.running = running;
+		port = sport;		
 	}
 	
 	public String toString() {

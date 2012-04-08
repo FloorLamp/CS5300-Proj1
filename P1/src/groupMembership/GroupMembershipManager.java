@@ -48,6 +48,10 @@ public class GroupMembershipManager extends Thread {
 		return MbrSet;
 	}
 	
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
 	public void run() {
 		while(running) {
 			try {
@@ -64,7 +68,12 @@ public class GroupMembershipManager extends Thread {
 		
 		if (mbrList.length() > 0) {
 			for (String s : mbrList.split("_")) {
-				members.add(new Server(s));
+				String[] addr = s.split("-");
+				try {
+					members.add(new Server(InetAddress.getByName(addr[0]), Integer.parseInt(addr[1])));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return members;
@@ -77,16 +86,63 @@ public class GroupMembershipManager extends Thread {
 			mbrList += (member.toString() + "_");
 		}
 		return mbrList.substring(0, mbrList.length() - 1);
+	}	
+	
+	public void addMember(Server s) {
+		try {
+			List<Attribute> SDBMbrList = sdb.getAttributes(
+					new GetAttributesRequest(MBR_LIST_DOMAIN, MBR_LIST_ITEM)).getAttributes();
+			boolean hasResults = (SDBMbrList.size() != 0);
+			String mbrs = hasResults ? SDBMbrList.get(0).getValue() :  ""; 
+			
+			MbrSet.add(s);
+			
+			List<ReplaceableAttribute> replaceableAttributes = new ArrayList<ReplaceableAttribute>();
+            replaceableAttributes.add(new ReplaceableAttribute(MBR_LIST_ATTR, encodeMemberList(), true));
+            PutAttributesRequest putAttributesRequest = new PutAttributesRequest(MBR_LIST_DOMAIN, MBR_LIST_ITEM, replaceableAttributes);
+
+            // If there are results in db, then set expected value. Otherwise, just write
+            if (hasResults) {
+            	putAttributesRequest.setExpected(new UpdateCondition(MBR_LIST_ATTR, mbrs, true));
+            }
+            sdb.putAttributes(putAttributesRequest);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	protected void refreshMembers() {
+	public void removeMember(Server s) {
+		try {
+			List<Attribute> SDBMbrList = sdb.getAttributes(
+					new GetAttributesRequest(MBR_LIST_DOMAIN, MBR_LIST_ITEM)).getAttributes();
+			boolean hasResults = (SDBMbrList.size() != 0);
+			String mbrs = hasResults ? SDBMbrList.get(0).getValue() :  ""; 
+			
+			MbrSet.remove(s);
+			
+			List<ReplaceableAttribute> replaceableAttributes = new ArrayList<ReplaceableAttribute>();
+            replaceableAttributes.add(new ReplaceableAttribute(MBR_LIST_ATTR, encodeMemberList(), true));
+            PutAttributesRequest putAttributesRequest = new PutAttributesRequest(MBR_LIST_DOMAIN, MBR_LIST_ITEM, replaceableAttributes);
+
+            // If there are results in db, then set expected value. Otherwise, just write
+            if (hasResults) {
+            	putAttributesRequest.setExpected(new UpdateCondition(MBR_LIST_ATTR, mbrs, true));
+            }
+            sdb.putAttributes(putAttributesRequest);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void refreshMembers() {
 		MbrSet.clear();
 		
 		try {
 			List<Attribute> SDBMbrList = sdb.getAttributes(
 					new GetAttributesRequest(MBR_LIST_DOMAIN, MBR_LIST_ITEM)).getAttributes();
 			boolean hasResults = (SDBMbrList.size() != 0);
-			System.out.println("server " + server + " sdbmbr: " + SDBMbrList + " has results: " + hasResults);
 			String mbrs = hasResults ? SDBMbrList.get(0).getValue() :  ""; 
 			
 			for (Server mbr : parseMembers(mbrs)) {
@@ -95,7 +151,7 @@ public class GroupMembershipManager extends Thread {
 						MbrSet.add(mbr);
 					}
 				}
-			}			
+			}
 			MbrSet.add(server);
 			
 			List<ReplaceableAttribute> replaceableAttributes = new ArrayList<ReplaceableAttribute>();

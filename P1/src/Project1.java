@@ -68,9 +68,9 @@ public class Project1 extends HttpServlet {
         out.println("</body></html>");
         return;
       } else if (cmd.equals("Refresh Membership")) {
-    	  localServer.refreshMembership();
+    	  gm.refreshMembers();
       } else if (cmd.equals("Server Crash")) {
-    	  localServer.setGroupMembershipRunning(false);
+    	  gm.setRunning(false);
     	  rpcServer.setRunning(false);
       }
     }
@@ -101,7 +101,7 @@ public class Project1 extends HttpServlet {
     out.println("<h3>Server: " + localServer + "</h3>");
     out.println("<h3>Session: " + session + "</h3>");
     out.println("<h3>MbrSet: </h3><ul>");
-    for (Server s : localServer.getMbrSet()) {
+    for (Server s : gm.getMbrSet()) {
     	out.println("<li>" + s.toString() + "</li>");
     }
     out.println("</ul>");
