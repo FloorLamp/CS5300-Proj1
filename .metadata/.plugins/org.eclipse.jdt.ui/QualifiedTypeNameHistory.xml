@@ -7,4 +7,5 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="groupMembership.Server"/>
 <fullyQualifiedTypeName name="groupMembership.GroupMembershipManager"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ConcurrentHashMap"/>
 </qualifiedTypeNameHistroy>
