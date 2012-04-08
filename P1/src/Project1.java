@@ -67,6 +67,11 @@ public class Project1 extends HttpServlet {
         out.println("<h2>Bye!</h2>");
         out.println("</body></html>");
         return;
+      } else if (cmd.equals("Refresh Membership")) {
+    	  localServer.refreshMembership();
+      } else if (cmd.equals("Server Crash")) {
+    	  localServer.setGroupMembershipRunning(false);
+    	  rpcServer.setRunning(false);
       }
     }
     // Write changed variables back to session
@@ -90,9 +95,16 @@ public class Project1 extends HttpServlet {
     out.println("<div><input type=\"submit\" value=\"Replace\" name=\"cmd\" /><input type=\"text\" name=\"replace_text\" /></div>");
     out.println("<div><input type=\"submit\" value=\"Refresh\" name=\"cmd\" /></div>");
     out.println("<div><input type=\"submit\" value=\"LogOut\" name=\"cmd\" /></div>");
+    out.println("<div><input type=\"submit\" value=\"Refresh Membership\" name=\"cmd\" /></div>");
+    out.println("<div><input type=\"submit\" value=\"Server Crash\" name=\"cmd\" /></div>");
     out.println("</form>");
     out.println("<h3>Server: " + localServer + "</h3>");
     out.println("<h3>Session: " + session + "</h3>");
+    out.println("<h3>MbrSet: </h3><ul>");
+    for (Server s : localServer.getMbrSet()) {
+    	out.println("<li>" + s.toString() + "</li>");
+    }
+    out.println("</ul>");
     out.println("</body></html>");
   }
 
