@@ -38,6 +38,7 @@ public class Startup extends HttpServlet {
       // Start GroupMembership service
       Project1.gm = new GroupMembershipManager(Project1.localServer);
       Project1.gm.start();
+      Project1.localServer.gm = Project1.gm;
     } catch (UnknownHostException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

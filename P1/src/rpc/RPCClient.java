@@ -103,7 +103,7 @@ public class RPCClient {
 			byte[] outBuf = marshal(temp);
 			
 			//for all the servers in the group membership
-			for( Server serv : s.getIPP().getMbrSet() ) {
+			for( Server serv : s.getIPP().gm.getMbrSet() ) {
 			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, serv.ip, serv.port);
 			    try{
 			    	socket.send(sendPkt);
@@ -175,7 +175,7 @@ public class RPCClient {
 			
 			//send the data packets
 			//for all the servers in the group membership
-			for( Server serv : s.getIPP().getMbrSet() ) {
+			for( Server serv : s.getIPP().gm.getMbrSet() ) {
 			    DatagramPacket sendPkt = new DatagramPacket(outBuf, outBuf.length, serv.ip, serv.port);
 			    try{
 			    	rpcSocket.send(sendPkt);

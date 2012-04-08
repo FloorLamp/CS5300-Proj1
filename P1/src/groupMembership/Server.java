@@ -8,6 +8,7 @@ public class Server {
 	public Integer port;
 	private final String IPP = ip+"-"+port;
 	private final static String IPPnull = "000000000-0";
+	public static GroupMembershipManager gm;
 	
 	public Server(InetAddress sip, int sport) {
 		ip = sip;
